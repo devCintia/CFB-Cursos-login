@@ -7,10 +7,11 @@ class Login{
     static callback_ok=null; 
     static callback_naook=null;
     static config={
-        cor:"048",
-        img:"./logo.png"
+        cor:null, //48
+        img:null, //"./logo.png"
+        endpoint:null, //"https://d0c297f1-724a-4fbd-ae9f-e7e6b7ff277e-00-1f235yizkmpr0.worf.replit.dev/";
     };
-    static endpoint="https://d0c297f1-724a-4fbd-ae9f-e7e6b7ff277e-00-1f235yizkmpr0.worf.replit.dev/";
+
     
     static login=(callback_ok,callback_naook,config=null)=>{
         if(config!=null){
@@ -128,22 +129,22 @@ class Login{
         const mat=document.querySelector("#f_Username").value;
         const pas=document.querySelector("#f_senha").value;
 
-        const endpoint=`https://d0c297f1-724a-4fbd-ae9f-e7e6b7ff277e-00-1f235yizkmpr0.worf.replit.dev/?matricula=${mat}&senha=${pas}`;
+        const endpoint=`${this.config.endpoint}/?matricula=${mat}&senha=${pas}`;
         fetch(endpoint)
         .then(res=>res.json())
         .then(res=>{
             if(res){
-                this.logado=true;
-                this.matlogado=mat;
-                this.nomelogado=res.nome;
-                this.acessologado=res.acesso;
+                sessionStorage.setItem("logado","true");
+                sessionStorage.setItem("matlogado",mat);
+                sessionStorage.setItem("nomelogado",res.nome);
+                sessionStorage.setItem("acessologado",res.acesso);
                 this.callback_ok();
                 this.fechar();
             }else{
-                this.logado=false;
-                this.matlogado=null;
-                this.nomelogado=null;
-                this.acessologado=null;
+                sessionStorage.setItem("logado","false");
+                sessionStorage.setItem("matlogado","");
+                sessionStorage.setItem("nomelogado","");
+                sessionStorage.setItem("acessologado","");
                 this.callback_naook();
             }
         })
@@ -158,3 +159,10 @@ class Login{
 }
 
 //export {Login};
+
+
+
+
+
+
+
