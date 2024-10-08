@@ -18,9 +18,8 @@ class Login{
                 sessionStorage.setItem("matlogado","");
                 sessionStorage.setItem("nomelogado","");
                 sessionStorage.setItem("acessologado","");
-        if(config!=null){
-            this.config=config;
-        }
+       
+        this.config=config;
         this.callback_ok=()=>{callback_ok()};
         this.callback_naook=()=>{callback_naook()};
         this.estilocss=
